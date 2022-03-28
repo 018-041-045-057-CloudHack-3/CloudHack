@@ -6,7 +6,8 @@ import os
 app = Flask(__name__)
 app.secret_key = 'thisisjustarandomstring'
 
-
+""""
+old monolithic arch code 
 def add(n1, n2):
     return n1+n2
 
@@ -18,6 +19,8 @@ def multiply(n1, n2):
 
 def divide(n1, n2):
     return n1/n2
+"""
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -41,13 +44,19 @@ def index():
     
     
     if operation == 'add':
-        result = add(number_1, number_2)
+        result = requests.get(url = f'http://add-service:5051/{number_1}/{number_2}').text
     elif operation == 'minus':
-        result =  minus(number_1, number_2)
+        result = requests.get(url = f'http://minus-service:5052/{number_1}/{number_2}').text
     elif operation == 'multiply':
-        result = multiply(number_1, number_2)
+        result = requests.get(url = f'http://multiply-service:5053/{number_1}/{number_2}').text
     elif operation == 'divide':
-        result = divide(number_1, number_2)
+        result = requests.get(url = f'http://divide-service:5054/{number_1}/{number_2}').text
+    elif operation == 'gcd':
+        result = requests.get(url = f'http://gcd-service:5055/{number_1}/{number_2}').text
+    elif operation == 'lcm':
+        result = requests.get(url = f'http://lcm-service:5056/{number_1}/{number_2}').text
+    elif operation == 'modulus':
+        result = requests.get(url = f'http://modulus-service:5057/{number_1}/{number_2}').text
 
     
     flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
