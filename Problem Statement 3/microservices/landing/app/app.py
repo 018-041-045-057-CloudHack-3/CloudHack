@@ -21,10 +21,25 @@ def divide(n1, n2):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+
     number_1 = request.form.get("first")
+    
+    if number_1 is None:
+    	number_1 = '0'
+    	
     number_2 = request.form.get('second')
+    
+    if number_2 is None:
+    	number_2 = '0'
+    	
+    number_1 = int(number_1)
+    number_2 = int(number_2)
+    
     operation = request.form.get('operation')
     result = 0
+   	
+    
+    
     if operation == 'add':
         result = add(number_1, number_2)
     elif operation == 'minus':
@@ -34,6 +49,7 @@ def index():
     elif operation == 'divide':
         result = divide(number_1, number_2)
 
+    
     flash(f'The result of operation {operation} on {number_1} and {number_2} is {result}')
 
     return render_template('index.html')
