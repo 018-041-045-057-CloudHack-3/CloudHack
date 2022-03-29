@@ -11,5 +11,89 @@ services:
         aliases:
           - landing-service
   # Add more services below
+  add-service:
+    build: ./addition
+    hostname: add-service
+    ports:
+      - 5051:5051  # host:container
+    depends_on:
+      - landing-service                             
+    networks:
+      sample:
+        aliases:
+          - add-service
+
+  minus-service:
+    build: ./subtraction
+    hostname: minus-service
+    ports:
+      - 5052:5052  # host:container
+    depends_on:
+      - landing-service                             
+    networks:
+      sample:
+        aliases:
+          - minus-service
+
+  multiply-service:
+    build: ./multiplication
+    hostname: multiply-service
+    ports:
+      - 5053:5053  # host:container
+    depends_on:
+      - landing-service                             
+    networks:
+      sample:
+        aliases:
+          - multiply-service
+
+  divide-service:
+    build: ./division
+    hostname: divide-service
+    ports:
+      - 5054:5054  # host:container
+    depends_on:
+      - landing-service                             
+    networks:
+      sample:
+        aliases:
+          - divide-service
+          
+  gcd-service:
+    build: ./gcd
+    hostname: gcd-service
+    ports:
+      - 5055:5055  # host:container
+    depends_on:
+      - landing-service                             
+    networks:
+      sample:
+        aliases:
+          - gcd-service
+          
+  lcm-service:
+    build: ./lcm
+    hostname: lcm-service
+    ports:
+      - 5056:5056  # host:container
+    depends_on:
+      - landing-service  
+      - gcd-service                           
+    networks:
+      sample:
+        aliases:
+          - lcm-service
+          
+  modulus-service:
+    build: ./modulus
+    hostname: modulus-service
+    ports:
+      - 5057:5057  # host:container
+    depends_on:
+      - landing-service                         
+    networks:
+      sample:
+        aliases:
+          - modulus-service
 networks:
   sample:
